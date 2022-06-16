@@ -149,7 +149,7 @@ jobs:
       displayName: "Build application"
       inputs:
         
-        target: 'aab'
+        target: 'apk'
         projectDirectory: '$(Build.SourcesDirectory)'
 
     # - task: CmdLine@2
