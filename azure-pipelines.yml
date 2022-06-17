@@ -141,7 +141,7 @@ jobs:
         targetType: 'inline'
         script: |
            cp $(keyprop.secureFilePath) $(Build.SourcesDirectory)/android/key.properties
-           cp $(key.secureFilePath) $(Build.SourcesDirectory)/android/app/key.jks
+           cp $(key.secureFilePath) $(Build.SourcesDirectory)/android/app/key.keystore
           
            echo "key.properties copied to $(Build.SourcesDirectory)/android/key.properties"
            echo "key.jks copied to $(Build.SourcesDirectory)/android/app/key.jks"
@@ -157,7 +157,7 @@ jobs:
       inputs:
         apkFiles: "**/*.apk"
         apksign: true
-        apksignerKeystoreFile: $(key.secureFilePath)
+        apksignerKeystoreFile: $(Build.SourcesDirectory)/android/app/key.keystore
         apksignerKeystorePassword: "$(keyPassword)"
         apksignerKeystoreAlias: $(keAlias)"
         apksignerKeyPassword: "$(keyPassword)"
