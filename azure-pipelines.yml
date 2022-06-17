@@ -4,7 +4,7 @@ jobs:
     pool: 
       vmImage: 'macOS-latest'
     variables:
-    - group: Default
+    - group: default
    
     steps:
 
@@ -159,7 +159,7 @@ jobs:
         apksign: true
         apksignerKeystoreFile: $(key.secureFilePath)
         apksignerKeystorePassword: "$(keyPassword)"
-        apksignerKeystoreAlias: yellowboxcert
+        apksignerKeystoreAlias: $(keAlias)"
         apksignerKeyPassword: "$(keyPassword)"
     # - task: CmdLine@2
     #   displayName: 'Signing and aligning AAB file(s) app\build\outputs\bundle\release\app-release.aab'
