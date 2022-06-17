@@ -148,10 +148,10 @@ jobs:
       inputs:
         apkFiles: "**/*.apk"
         apksign: true
-        apksignerKeystoreFile: $(key.secureFilePath)
-        apksignerKeystorePassword: "$(keyPassword)"
-        apksignerKeystoreAlias: $(keyAlias)
-        apksignerKeyPassword: "$(keyPassword)"
+        apksignerKeystoreFile: '$(key.secureFilePath)'
+        apksignerKeystorePassword: '$(keyPassword)'
+        apksignerKeystoreAlias: '$(keyAlias)'
+        apksignerKeyPassword: '$(keyPassword)'
     # - task: CmdLine@2
     #   displayName: 'Signing and aligning AAB file(s) app\build\outputs\bundle\release\app-release.aab'
     #   inputs:
