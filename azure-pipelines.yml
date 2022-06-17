@@ -169,7 +169,9 @@ jobs:
       displayName: "Copy notes"
       inputs:
         sourceFolder: '$(Agent.BuildDirectory)'
-        contents: '**/bundle/**'
+        contents: |
+          **/bundle/**
+          **/flutter-apk/**
         targetFolder: '$(Build.StagingDirectory)'
         flattenFolders: true
 
