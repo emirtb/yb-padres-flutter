@@ -4,7 +4,7 @@ jobs:
     pool: 
       vmImage: 'macOS-latest'
     variables:
-    - group: Default
+    - group: default
    
     steps:
 
@@ -140,18 +140,29 @@ jobs:
       inputs:
         targetType: 'inline'
         script: |
+           echo $(key.secureFilePath)
            cp $(keyprop.secureFilePath) $(Build.SourcesDirectory)/android/key.properties
-           cp $(key.secureFilePath) $(Build.SourcesDirectory)/android/app/key.jks
+           cp $(key.secureFilePath) $(Build.SourcesDirectory)/android/app/YellowBox2.keystore
           
            echo "key.properties copied to $(Build.SourcesDirectory)/android/key.properties"
            echo "key.jks copied to $(Build.SourcesDirectory)/android/app/key.jks"
+
     - task: FlutterBuild@0
       displayName: "Build application"
       inputs:
         
-        target: 'aab'
+        target: 'apk'
         projectDirectory: '$(Build.SourcesDirectory)'
 
+    - task: AndroidSigning@3
+      displayName: "Signing and aligning APK file(s) **/*.apk"
+      inputs:
+        apkFiles: "**/*.apk"
+        apksign: true
+        apksignerKeystoreFile: 'YellowBox2.keystore'
+        apksignerKeystorePassword: '$(keyPassword)'
+        apksignerKeystoreAlias: '$(keyAlias)'
+        apksignerKeyPassword: '$(keyPassword)'
     # - task: CmdLine@2
     #   displayName: 'Signing and aligning AAB file(s) app\build\outputs\bundle\release\app-release.aab'
     #   inputs:
@@ -169,7 +180,9 @@ jobs:
       displayName: "Copy notes"
       inputs:
         sourceFolder: '$(Agent.BuildDirectory)'
-        contents: '**/bundle/**'
+        contents: |
+          **/bundle/**
+          **/flutter-apk/**
         targetFolder: '$(Build.StagingDirectory)'
         flattenFolders: true
 
