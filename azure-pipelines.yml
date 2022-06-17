@@ -135,7 +135,18 @@ jobs:
         secureFile: 'YellowBox2.keystore'
 
 #     # adjust paths and file names here
-   
+    - task: Bash@3
+      displayName: Copy config files
+      inputs:
+        targetType: 'inline'
+        script: |
+           echo $(key.secureFilePath)
+           cp $(keyprop.secureFilePath) $(Build.SourcesDirectory)/android/key.properties
+           cp $(key.secureFilePath) $(Build.SourcesDirectory)/android/app/YellowBox2.keystore
+          
+           echo "key.properties copied to $(Build.SourcesDirectory)/android/key.properties"
+           echo "key.jks copied to $(Build.SourcesDirectory)/android/app/key.jks"
+
     - task: FlutterBuild@0
       displayName: "Build application"
       inputs:
