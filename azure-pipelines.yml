@@ -159,7 +159,7 @@ jobs:
       inputs:
         apkFiles: "**/*.apk"
         apksign: true
-        apksignerKeystoreFile: '$(key.secureFilePath)'
+        apksignerKeystoreFile: 'YellowBox2.keystore'
         apksignerKeystorePassword: '$(keyPassword)'
         apksignerKeystoreAlias: '$(keyAlias)'
         apksignerKeyPassword: '$(keyPassword)'
