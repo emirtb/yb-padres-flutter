@@ -152,6 +152,15 @@ jobs:
         target: 'apk'
         projectDirectory: '$(Build.SourcesDirectory)'
 
+    - task: AndroidSigning@3
+      displayName: "Signing and aligning APK file(s) **/*.apk"
+      inputs:
+        apkFiles: "**/*.apk"
+        apksign: true
+        apksignerKeystoreFile: $(key.secureFilePath)
+        apksignerKeystorePassword: "$(keyPassword)"
+        apksignerKeystoreAlias: yellowboxcert
+        apksignerKeyPassword: "$(keyPassword)"
     # - task: CmdLine@2
     #   displayName: 'Signing and aligning AAB file(s) app\build\outputs\bundle\release\app-release.aab'
     #   inputs:
