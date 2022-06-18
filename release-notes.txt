@@ -1,1 +1,1 @@
-s
+* Esta es una nota de ejemplo para build
